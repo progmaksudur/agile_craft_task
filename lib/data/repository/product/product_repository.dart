@@ -85,7 +85,7 @@ class ProductRepository implements ProductDomRepository{
     // TODO: implement getProductFormOffline
     try{
      final products = await productDatabase.fetchProducts(isTemp: false);
-     return products.map((product) =>ProductModel.fromMap(product)).toList();
+     return products.map((product) =>ProductModel.fromMapOffline(product)).toList();
     }catch(error){
       if(kDebugMode){
         debugPrint(error.toString());

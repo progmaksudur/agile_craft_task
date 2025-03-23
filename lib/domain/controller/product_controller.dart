@@ -89,7 +89,7 @@ class ProductController extends GetxController{
                 "isAvailable": product['isAvailable'],
                 "id": product['id'],
               };
-              await repository.updateProductOnline(ProductModel.fromMap(productMap));
+              await repository.updateProductOnline(ProductModel.fromMapOffline(productMap));
             }else{
               final productMap={
                 "name": product['name'],

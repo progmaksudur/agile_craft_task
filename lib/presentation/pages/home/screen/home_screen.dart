@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: GetBuilder<ProductController>(
         builder: (productController) {
           final products = productController.products;
+
           return productController.isProductLoading == false
               ? ListView.builder(
                 itemCount: products.length,

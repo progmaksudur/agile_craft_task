@@ -37,9 +37,9 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 60),
-                Text("Product Name: ${productController.selectedProduct!.name}"),
+                Text("Product Name: ${productController.selectedProduct?.name}"),
                 const SizedBox(height: 20),
-                Text("Product Description: ${productController.selectedProduct!.description}"),
+                Text("Product Description: ${productController.selectedProduct?.description}"),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: nameController,
@@ -63,7 +63,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                 const SizedBox(height: 20),
                 SwitchListTile(
                   title: Text("Is Available"),
-                  value: productController.selectedProduct!.isAvailable,
+                  value: productController.selectedProduct?.isAvailable??false,
                   onChanged: (value) {
                     productController.topSelectedAvailable();
                   },
@@ -78,7 +78,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                     if(descriptionController.text.isNotEmpty){
                       product.description = descriptionController.text;
                     }
-                    productController.updateProduct(product).then((value) {
+                   productController.updateProduct(product).then((value) {
                       if(productController.isUpdateProductLoading==false){
                         productController.removeSelectedProduct();
                         nameController.clear();

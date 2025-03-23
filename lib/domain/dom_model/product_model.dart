@@ -18,7 +18,7 @@ class ProductModel {
 
 
   // Convert a Map to a ProductTempModel instance
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
+  factory ProductModel.fromMapOffline(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'] ?? 0,
       name: map['name'] ?? '',
@@ -26,6 +26,17 @@ class ProductModel {
       isAvailable: (map['isAvailable'] ?? 0) == 1, // Convert int to bool
       tenantId: map['tenantId'] ?? 0,
     );
+  }
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+      description: map['description'] ?? '', // Fixed key to match database schema
+      isAvailable: map['isAvailable'] ?? false, // Convert int to bool
+      tenantId: map['tenantId'] ?? 0,
+    );
+
   }
 
   // Convert a ProductTempModel instance to a Map
