@@ -25,9 +25,14 @@ class ProductRepository implements ProductDomRepository{
   Future<void> createProductOffline(ProductCreateRequestModel product,bool isTemp)async {
     // TODO: implement createProductOffline
     try{
-      final productMap= product.toMap();
-      productMap["isUpdate"]=0;
-       await productDatabase.insertProduct(product.toMap(),isTemp: isTemp);
+      final productMap= {
+
+        "name":product.name,
+        "description":product.description,
+        "isAvailable":product.isAvailable ? 1 : 0,
+        "isUpdate" : 0
+      };
+       await productDatabase.insertProduct(productMap,isTemp: isTemp);
 
     }catch(error){
       if(kDebugMode){

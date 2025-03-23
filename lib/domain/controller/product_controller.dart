@@ -59,6 +59,8 @@ class ProductController extends GetxController{
           await repository.createProductOnline(product);
         } catch (error) {
           await repository.createProductOffline(product, true);
+          _createProductLoading=false;
+          update();
           if (kDebugMode) {
             debugPrint("Failed to sync online, stored offline: ${product.name}");
           }
@@ -68,6 +70,8 @@ class ProductController extends GetxController{
       if (kDebugMode) {
         debugPrint("No internet. Stored products offline.");
       }
+      _createProductLoading=false;
+      update();
     }
     getAllProductFromOnlineAndOffline();
     _createProductLoading=false;
@@ -155,6 +159,7 @@ class ProductController extends GetxController{
       }
 
       final tempProducts = await repository.getTempProductFormOffline();
+
       ///product id not checking
       for(var product in tempProducts) {
         final productMap = {
@@ -163,8 +168,9 @@ class ProductController extends GetxController{
           "isAvailable": product['isAvailable'],
           "id": product['id'],
         };
-        allProducts.add(ProductModel.fromMap(productMap));
+        allProducts.add(ProductModel.fromMapOffline(productMap));
       }
+
 
     } catch (error) {
       if (kDebugMode) {
